@@ -1,0 +1,43 @@
+<!-- File: cart.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteWise - Keranjang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }</style>
+</head>
+<body class="flex justify-center min-h-screen bg-gray-200">
+
+    <div class="w-full max-w-[375px] bg-gray-50 h-full min-h-screen flex flex-col">
+        
+        <!-- Header -->
+        <div class="bg-white p-5 rounded-b-3xl shadow-sm flex items-center">
+            <a href="dashboard.html" class="mr-4"><i class="fas fa-arrow-left text-lg"></i></a>
+            <h1 class="text-lg font-bold">Keranjang Saya</h1>
+        </div>
+
+        <!-- List Item -->
+        <div class="p-5 flex-1 overflow-y-auto" id="cart-items">
+            <!-- Item akan diisi otomatis oleh app.js -->
+            <p class="text-center text-gray-400 mt-10">Memuat...</p>
+        </div>
+
+        <!-- Footer Checkout -->
+        <div class="bg-white p-5 border-t rounded-t-3xl shadow-lg">
+            <div class="flex justify-between mb-4">
+                <span class="text-gray-600">Total Harga</span>
+                <span class="font-bold text-xl text-green-700" id="total-price">Rp0</span>
+            </div>
+            <button onclick="alert('Pesanan berhasil dikirim!')" class="w-full bg-green-700 text-white py-3 rounded-xl font-bold hover:bg-green-800">
+                Konfirmasi Pesanan
+            </button>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
