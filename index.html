@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f9fafb;
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loading Screen -->
+    <div class="text-center">
+      <div
+        class="w-10 h-10 border-4 border-gray-300 border-t-green-600 rounded-full animate-spin mx-auto mb-4"
+      ></div>
+      <p class="text-gray-500 text-sm">Memuat aplikasi...</p>
+    </div>
+
+    <script>
+      // simulasi loading + cek login
+      setTimeout(() => {
+        const isLogin = localStorage.getItem("isLogin");
+
+        if (isLogin === "true") {
+          window.location.href = "dashboard.html";
+        } else {
+            window.location.href = "pages/login.html";
+        }
+      }, 1000); // delay 1 detik biar ada efek loading
+    </script>
+  </body>
+</html>
