@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
 
-    <!-- FONT AWESOME (WAJIB GLOBAL) -->
+    <!-- FONT AWESOME -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -26,7 +26,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
+        height: 100vh;
       }
 
       .phone-frame {
@@ -40,40 +40,13 @@
         display: flex;
         flex-direction: column;
       }
-
-      .card {
-        background: #003d29;
-        color: white;
-        padding: 20px;
-        border-radius: 16px;
-      }
-
-      .menu-card {
-        background: white;
-        border: 1px solid #eee;
-        padding: 15px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logout-btn {
-        background: #ef4444;
-        color: white;
-        padding: 12px;
-        border-radius: 12px;
-        text-align: center;
-        margin-top: auto;
-      }
     </style>
   </head>
 
   <body>
-    <div class="phone-frame flex flex-col">
+    <div class="phone-frame flex flex-col h-full">
       <!-- HEADER -->
       <div class="mt-2 mb-2">
-        <!-- BARIS ATAS -->
         <div class="flex items-center justify-between">
           <h1 class="text-2xl font-bold text-[#003d2b]">Halo, Warung AW!</h1>
 
@@ -84,27 +57,28 @@
           </div>
         </div>
 
-        <!-- BARIS BAWAH -->
-        <p class="text-base text-black font-semibold mt-4">Pesanan untuk Saya</p>
+        <p class="text-base text-black font-semibold mt-4">
+          Pesanan untuk Saya
+        </p>
       </div>
 
-      <!-- CONTENT (BIAR SCROLLABLE) -->
-      <div class="flex-1 overflow-y-auto">
+      <!-- CONTENT WRAPPER -->
+      <div class="flex-1 flex flex-col">
         <!-- TAB -->
-        <div class="w-full">
-          <div class="flex bg-gray-100 p-2 rounded-full w-full">
-            <button
-              class="flex-1 px-2 py-1 rounded-full bg-[#003d2b] text-white text-sm"
-            >
-              Semua
-            </button>
-            <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
-              Pesanan Baru
-            </button>
-            <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
-              Dipersiapkan
-            </button>
-          </div>
+        <div class="flex bg-gray-100 p-2 rounded-full w-full">
+          <button
+            class="flex-1 px-2 py-1 rounded-full bg-[#003d2b] text-white text-sm"
+          >
+            Semua
+          </button>
+
+          <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
+            Pesanan Baru
+          </button>
+
+          <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
+            Dipersiapkan
+          </button>
         </div>
 
         <!-- CARD -->
@@ -128,10 +102,13 @@
 
             <div class="text-sm space-y-1 mb-3">
               <div class="flex justify-between text-gray-600">
-                <span>Nasi Goreng</span><span>x1</span>
+                <span>Nasi Goreng</span>
+                <span>x1</span>
               </div>
+
               <div class="flex justify-between text-gray-600">
-                <span>Mie Goreng</span><span>x1</span>
+                <span>Mie Goreng</span>
+                <span>x1</span>
               </div>
             </div>
 
@@ -150,36 +127,141 @@
         </div>
       </div>
 
-      <!-- NAVBAR (INI SEKARANG TIDAK AKAN HILANG) -->
-      <div class="flex justify-between items-center pt-3 border-t">
-        <div class="flex flex-col items-center text-[#003d2b]">
-          <i class="fa-solid fa-house text-xl"></i>
-          <span class="text-xs mt-1">Beranda</span>
-        </div>
-
-        <div class="flex flex-col items-center text-gray-500">
-          <i class="fa-solid fa-box text-xl"></i>
-          <span class="text-xs mt-1">Menu</span>
-        </div>
-
-        <div class="flex flex-col items-center text-gray-500">
-          <i class="fa-solid fa-user text-xl"></i>
-          <span class="text-xs mt-1">Profil</span>
-        </div>
-      </div>
+      <!-- NAVBAR INJECT -->
+      <div id="navbar"></div>
     </div>
-  </body>
 
-  <!--<script>
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+    <!-- SCRIPT LOGIC -->
+    <script>
+      fetch("../components/navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar").innerHTML = data;
+        });
+    </script>
 
-      // proteksi dashboard
+    <!--
+      const API_URL = "https://your-api.com/api/orders"; // GANTI INI
       const token = localStorage.getItem("token");
+
       if (!token) {
         window.location.href = "login.html";
       }
-    </script>
---></html>
+
+      let allOrders = [];
+      let currentTab = "all";
+
+      document.addEventListener("DOMContentLoaded", fetchOrders);
+
+      async function fetchOrders() {
+        try {
+          const res = await fetch(API_URL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await res.json();
+          allOrders = data;
+
+          renderOrders();
+        } catch (err) {
+          console.error(err);
+          document.getElementById("orderList").innerHTML =
+            "<p class='text-red-500 text-center'>Gagal memuat data</p>";
+        }
+      }
+
+      function setTab(tab) {
+        currentTab = tab;
+        renderOrders();
+      }
+
+      function renderOrders() {
+        const container = document.getElementById("orderList");
+        container.innerHTML = "";
+
+        let filtered = allOrders;
+
+        if (currentTab !== "all") {
+          filtered = allOrders.filter((o) => o.status === currentTab);
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML =
+            "<p class='text-center text-gray-400'>Tidak ada pesanan</p>";
+          return;
+        }
+
+        filtered.forEach((order) => {
+          const items = order.items
+            .map(
+              (i) => `
+              <div class="flex justify-between text-gray-600">
+                <span>${i.name}</span>
+                <span>x${i.qty}</span>
+              </div>
+            `,
+            )
+            .join("");
+
+          container.innerHTML += `
+            <div class="bg-white rounded-2xl border p-4 shadow-sm">
+              
+              <div class="flex justify-between mb-2">
+                <span class="bg-orange-500 text-white text-xs px-3 py-1 rounded-full">
+                  ${getStatus(order.status)}
+                </span>
+                <span class="font-bold">#${order.id}</span>
+              </div>
+
+              <div class="flex justify-between mb-2">
+                <h2 class="font-semibold">${order.name}</h2>
+                <span class="text-gray-400 text-sm">${order.time}</span>
+              </div>
+
+              <div class="text-sm space-y-1 mb-2">
+                ${items}
+              </div>
+
+              <div class="border-t pt-2 flex justify-end font-bold">
+                Rp ${order.total.toLocaleString("id-ID")}
+              </div>
+
+              <div class="flex justify-end mt-3">
+                <button onclick="updateStatus(${order.id})"
+                  class="border border-emerald-800 text-emerald-800 text-sm px-4 py-2 rounded-lg">
+                  Siapkan Pesanan
+                </button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      function getStatus(status) {
+        if (status === "new") return "Pesanan Baru";
+        if (status === "preparing") return "Dipersiapkan";
+        return "Selesai";
+      }
+
+      async function updateStatus(id) {
+        try {
+          await fetch(`${API_URL}/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status: "preparing" }),
+          });
+
+          fetchOrders();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    </script> -->
+  </body>
+</html>
