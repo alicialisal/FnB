@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+
+    <!-- FONT AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: #f3f4f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .phone-frame {
+        width: 100%;
+        max-width: 375px;
+        height: 812px;
+        background: white;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="phone-frame flex flex-col h-full">
+      <!-- HEADER -->
+      <div class="flex items-center justify-between mb-4 mt-2">
+        <h1 class="text-2xl font-bold text-[#003d2b]">Menu Toko Saya</h1>
+
+        <button
+          onclick="window.location.href = 'tambah-menu.html'"
+          class="w-11 h-11 bg-[#f28a2c] rounded-full flex items-center justify-center shadow hover:scale-105 active:scale-95 transition"
+        >
+          <i class="fa-solid fa-plus text-white text-lg"></i>
+        </button>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="mb-4">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+          <i class="fa fa-search text-gray-400"></i>
+          <input
+            type="text"
+            placeholder="Cari menu..."
+            class="bg-transparent w-full ml-2 outline-none text-sm"
+          />
+        </div>
+      </div>
+
+      <!-- MENU LIST -->
+      <div class="flex-1 overflow-y-auto space-y-3">
+        <!-- CARD 1 -->
+        <div
+          class="bg-white border rounded-2xl p-3 shadow-sm flex items-center justify-between gap-3"
+        >
+          <!-- GAMBAR -->
+          <img
+            src="https://source.unsplash.com/100x100/?fried-rice"
+            class="w-14 h-14 rounded-xl object-cover"
+          />
+
+          <!-- INFO TENGAH -->
+          <div class="flex-1 flex flex-col justify-center">
+            <!-- NAMA + TOGGLE (baris 1) -->
+            <div class="flex justify-between items-center">
+              <h3 class="font-semibold text-sm">Nasi Goreng Spesial</h3>
+
+              <!-- TOGGLE -->
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer" checked />
+
+                <!-- TRACK -->
+                <div
+                  class="w-10 h-5 bg-gray-300 rounded-full transition-colors duration-300 peer-checked:bg-[#003d2b]"
+                ></div>
+
+                <!-- DOT -->
+                <div
+                  class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-300 peer-checked:translate-x-5"
+                ></div>
+              </label>
+
+            </div>
+
+            <!-- HARGA (baris 2) -->
+            <span class="text-xs text-gray-500">Rp 18.000</span>
+
+            <!-- STOK (baris 3) -->
+            <span class="text-xs text-gray-500 mt-4">Sisa stok: 12</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAVBAR -->
+      <div id="navbar"></div>
+    </div>
+
+    <!-- NAVBAR SCRIPT -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../components/navbar.html")
+          .then((res) => res.text())
+          .then((html) => {
+            document.getElementById("navbar").innerHTML = html;
+
+            setTimeout(() => {
+              const path = window.location.pathname;
+              const buttons = document.querySelectorAll(".navbar-btn");
+
+              buttons.forEach((btn) => {
+                const page = btn.getAttribute("data-page");
+
+                if (path.includes(page.replace(".html", ""))) {
+                  btn.classList.remove("text-gray-500");
+                  btn.classList.add("text-[#003d2b]");
+                }
+              });
+            }, 50);
+          });
+      });
+    </script>
+  </body>
+</html>

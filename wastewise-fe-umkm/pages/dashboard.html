@@ -133,11 +133,27 @@
 
     <!-- SCRIPT LOGIC -->
     <script>
-      fetch("../components/navbar.html")
-        .then((res) => res.text())
-        .then((data) => {
-          document.getElementById("navbar").innerHTML = data;
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../components/navbar.html")
+          .then((res) => res.text())
+          .then((html) => {
+            document.getElementById("navbar").innerHTML = html;
+
+            setTimeout(() => {
+              const path = window.location.pathname;
+              const buttons = document.querySelectorAll(".navbar-btn");
+
+              buttons.forEach((btn) => {
+                const page = btn.getAttribute("data-page");
+
+                if (path.includes(page.replace(".html", ""))) {
+                  btn.classList.remove("text-gray-500");
+                  btn.classList.add("text-[#003d2b]");
+                }
+              });
+            }, 50);
+          });
+      });
     </script>
 
     <!--
