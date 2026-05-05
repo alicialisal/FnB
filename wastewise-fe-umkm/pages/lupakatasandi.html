@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lupa Kata Sandi</title>
+
+    <!-- Font (samakan dengan login) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .forgot-container {
+        background: #fff;
+        width: 100%;
+        max-width: 400px;
+        padding: 35px 25px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="forgot-container">
+      <!-- HEADER -->
+      <div>
+        <div class="flex items-center gap-5 mb-10">
+          <button
+            onclick="history.back()"
+            class="w-12 h-12 rounded-full bg-[#f28a2c] text-white text-3xl pb-1"
+          >
+            ‹
+          </button>
+
+          <h1 class="text-[22px] font-bold text-[#004b34]">Lupa Kata Sandi</h1>
+        </div>
+
+        <!-- FORM -->
+        <div class="text-center space-y-6">
+          <h2 class="font-semibold text-[#004b34] text-xl">
+            Masukkan Alamat Email
+          </h2>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="Alamat Email"
+            class="w-full h-14 px-5 rounded-xl bg-white shadow-md outline-none text-gray-700"
+          />
+        </div>
+      </div>
+
+      <!-- BUTTON (tidak absolute lagi) -->
+      <button
+        onclick="kirimReset()"
+        class="w-full bg-[#004b34] text-white text-xl py-4 rounded-2xl font-medium mt-10"
+      >
+        Kirim
+      </button>
+    </div>
+
+    <script>
+      function kirimReset() {
+        const email = document.getElementById("email").value.trim();
+
+        if (email === "") {
+          alert("Masukkan email dulu");
+          return;
+        }
+
+        alert("Link reset password dikirim ke: " + email);
+      }
+    </script>
+  </body>
+</html>
