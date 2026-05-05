@@ -36,14 +36,16 @@
       }
 
       .login-container {
-        background: #fff;
+        background: white;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         width: 100%;
         max-width: 400px;
         padding: 35px 25px;
       }
 
       header h1 {
-        color: #003D2B;
+        color: #003d2b;
         font-size: 28px;
         font-weight: 700;
       }
@@ -156,6 +158,16 @@
         outline: none;
         font-size: 14px;
       }
+
+      .input-error {
+        border: 1px solid #ef4444 !important;
+      }
+
+      .error-text {
+        color: #ef4444;
+        font-size: 12px;
+        margin-top: 4px;
+      }
     </style>
   </head>
 
@@ -188,7 +200,9 @@
 
         <!-- PHONE -->
         <div class="input-box">
-          <div class="flex items-center gap-2 pr-6 mr-6 border-r border-gray-300">
+          <div
+            class="flex items-center gap-2 pr-6 mr-6 border-r border-gray-300"
+          >
             <img src="https://flagcdn.com/w20/id.png" class="w-5" />
             <span class="font-semibold text-sm">+62</span>
           </div>
@@ -226,7 +240,9 @@
           Password tidak sama!
         </p>
 
-        <button type="submit" class="btn-primary">Daftar</button>
+        <button type="submit" id="registerButton" class="btn-primary">
+          Daftar
+        </button>
       </form>
 
       <div class="divider">Atau daftar dengan</div>
@@ -236,7 +252,7 @@
         <button><i class="fab fa-facebook-f text-[#1877F2]"></i></button>
       </div>
 
-        <footer>Sudah punya akun? <a href="login.html">Masuk</a></footer>
+      <footer>Sudah punya akun? <a href="login.html">Masuk</a></footer>
     </div>
 
     <script>
@@ -253,18 +269,129 @@
         }
       }
 
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
-          const pass = document.getElementById("password").value;
-          const confirm = document.getElementById("confirmPassword").value;
-          const error = document.getElementById("errorMsg");
+      // =========================
+      // AMBIL ELEMENT
+      // =========================
+      const form = document.getElementById("registerForm");
 
-          if (pass !== confirm) {
-            e.preventDefault();
-            error.classList.remove("hidden");
+      const nameInput = document.getElementById("name");
+      const emailInput = document.getElementById("email");
+      const cityInput = document.getElementById("city");
+      const phoneInput = document.getElementById("phone");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+
+      const errorMsg = document.getElementById("errorMsg");
+      const registerButton = document.getElementById("registerButton");
+
+      // =========================
+      // VALIDASI
+      // =========================
+      function validatePhone(phone) {
+        const regex = /^[0-9]+$/;
+        return regex.test(phone) && phone.length >= 10;
+      }
+
+      function validateEmail(email) {
+        return email.includes("@");
+      }
+
+      function validatePassword(pass) {
+        return pass.length >= 6;
+      }
+
+      // =========================
+      // SUBMIT REGISTER
+      // =========================
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const city = cityInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+
+        // reset error
+        errorMsg.classList.add("hidden");
+
+        // VALIDASI PASSWORD MATCH
+        if (password !== confirmPassword) {
+          errorMsg.textContent = "Password tidak sama!";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        // VALIDASI FIELD KOSONG
+        if (!name || !email || !city || !phone || !password) {
+          errorMsg.textContent = "Semua field wajib diisi!";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        // VALIDASI EMAIL
+        if (!validateEmail(email)) {
+          errorMsg.textContent = "Email tidak valid!";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        // VALIDASI PHONE
+        if (!validatePhone(phone)) {
+          errorMsg.textContent = "Nomor handphone tidak valid!";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        // VALIDASI PASSWORD
+        if (!validatePassword(password)) {
+          errorMsg.textContent = "Password minimal 6 karakter!";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        // =========================
+        // LOADING STATE
+        // =========================
+        registerButton.disabled = true;
+        registerButton.innerText = "Memproses...";
+
+        try {
+          const response = await fetch("http://localhost:3000/api/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              city,
+              phone,
+              password,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Register berhasil!");
+
+            // redirect ke login
+            window.location.href = "login.html";
+          } else {
+            errorMsg.textContent = data.message || "Register gagal!";
+            errorMsg.classList.remove("hidden");
           }
-        });
+        } catch (error) {
+          console.error(error);
+          errorMsg.textContent = "Tidak bisa terhubung ke server";
+          errorMsg.classList.remove("hidden");
+        } finally {
+          registerButton.disabled = false;
+          registerButton.innerText = "Daftar";
+        }
+      });
     </script>
   </body>
 </html>
