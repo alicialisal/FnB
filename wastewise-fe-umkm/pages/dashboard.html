@@ -1,201 +1,185 @@
-<!-- =========================
-FILE : dashboard.html (wrapper sudah disesuaikan)
-========================= -->
 <!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dashboard</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONT AWESOME (WAJIB GLOBAL) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Inter",sans-serif;
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-body{
-  background:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
 
-/* WRAPPER SAMA SEPERTI LOGIN */
-.mobile-screen{
-  width:100%;
-  max-width:400px;
-  min-height:100vh;
-  background:#f3f3f3;
-  position:relative;
-  overflow:hidden;
-}
+      body {
+        background: #f3f4f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
 
-/* hilangkan scrollbar */
-.hide-scroll::-webkit-scrollbar{
-  display:none;
-}
-.hide-scroll{
-  -ms-overflow-style:none;
-  scrollbar-width:none;
-}
-</style>
-</head>
+      .phone-frame {
+        width: 100%;
+        max-width: 375px;
+        height: 812px;
+        background: white;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
 
-<body>
+      .card {
+        background: #003d29;
+        color: white;
+        padding: 20px;
+        border-radius: 16px;
+      }
 
-<!-- WRAPPER -->
-<div class="mobile-screen">
+      .menu-card {
+        background: white;
+        border: 1px solid #eee;
+        padding: 15px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-    <!-- HEADER -->
-    <div class="px-7 pt-14 flex justify-between items-center">
-        <div>
-            <h1 class="text-[20px] font-bold text-[#004b34]">
-              Halo, Warung AW!
-            </h1>
+      .logout-btn {
+        background: #ef4444;
+        color: white;
+        padding: 12px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: auto;
+      }
+    </style>
+  </head>
 
-            <p class="mt-5 text-[18px] font-semibold text-[#222]">
-              Pesanan untuk Saya
-            </p>
+  <body>
+    <div class="phone-frame flex flex-col">
+      <!-- HEADER -->
+      <div class="mt-2 mb-2">
+        <!-- BARIS ATAS -->
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl font-bold text-[#003d2b]">Halo, Warung AW!</h1>
+
+          <div
+            class="w-11 h-11 bg-[#f28a2c] rounded-full flex items-center justify-center shadow"
+          >
+            <i class="fa-solid fa-bell text-white text-lg"></i>
+          </div>
         </div>
 
-        <button class="w-12 h-12 rounded-full bg-[#f28a2c] text-white text-xl">
-          🔔
-        </button>
-    </div>
+        <!-- BARIS BAWAH -->
+        <p class="text-base text-black font-semibold mt-4">Pesanan untuk Saya</p>
+      </div>
 
-    <!-- FILTER -->
-    <div class="flex gap-3 px-7 mt-6 overflow-auto hide-scroll">
-        <button class="px-6 py-2 rounded-full bg-[#004b34] text-white text-sm font-medium whitespace-nowrap">
-          Semua
-        </button>
-
-        <button class="px-5 py-2 rounded-full bg-[#e8efea] text-[#111] text-sm whitespace-nowrap">
-          Pesanan Baru
-        </button>
-
-        <button class="px-5 py-2 rounded-full bg-[#e8efea] text-[#111] text-sm whitespace-nowrap">
-          Dipersiapkan
-        </button>
-    </div>
-
-    <!-- CONTENT -->
-    <div class="px-5 mt-6 pb-32 space-y-5 overflow-y-auto max-h-[calc(100vh-210px)]">
-
-        <!-- CARD 1 -->
-        <div class="bg-white rounded-3xl shadow-md border border-gray-200 p-5">
-            <div class="flex justify-between items-start">
-
-                <div class="bg-[#f28a2c] text-white text-xs px-5 py-1 rounded-full">
-                  Pesanan Baru
-                </div>
-
-                <div class="text-right">
-                    <h2 class="font-bold text-2xl text-[#222]">#20</h2>
-                    <p class="text-gray-500 text-sm">08.30</p>
-                </div>
-
-            </div>
-
-            <div class="mt-3">
-                <p class="font-semibold">Jonathan</p>
-
-                <div class="mt-2 text-gray-700 text-sm space-y-1">
-                    <div class="flex justify-between">
-                        <span>Nasi Goreng</span>
-                        <span>x1</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <span>Mie Goreng</span>
-                        <span>x1</span>
-                    </div>
-                </div>
-
-                <div class="border-b border-dotted border-gray-400 mt-3"></div>
-
-                <div class="mt-3 flex justify-between items-center">
-                    <button class="border border-[#004b34] text-[#004b34] px-5 py-2 rounded-xl font-semibold text-sm">
-                      Siapkan Pesanan
-                    </button>
-
-                    <p class="font-bold text-xl">Rp 24.000</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="bg-white rounded-3xl shadow-md border border-gray-200 p-5">
-            <div class="flex justify-between items-start">
-
-                <div class="bg-[#f28a2c] text-white text-xs px-5 py-1 rounded-full">
-                  Pesanan Baru
-                </div>
-
-                <div class="text-right">
-                    <h2 class="font-bold text-2xl text-[#222]">#21</h2>
-                    <p class="text-gray-500 text-sm">08.45</p>
-                </div>
-
-            </div>
-
-            <div class="mt-3">
-                <p class="font-semibold">Jonathan</p>
-
-                <div class="mt-2 text-gray-700 text-sm space-y-1">
-                    <div class="flex justify-between">
-                        <span>Nasi Goreng</span>
-                        <span>x1</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <span>Mie Ayam</span>
-                        <span>x2</span>
-                    </div>
-                </div>
-
-                <div class="border-b border-dotted border-gray-400 mt-3"></div>
-
-                <div class="mt-3 flex justify-between items-center">
-                    <button class="border border-[#004b34] text-[#004b34] px-5 py-2 rounded-xl font-semibold text-sm">
-                      Siapkan Pesanan
-                    </button>
-
-                    <p class="font-bold text-xl">Rp 30.000</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- BOTTOM NAV -->
-    <div class="absolute bottom-0 left-0 right-0 bg-[#eaf0ed] rounded-t-3xl shadow-xl px-8 py-4">
-        <div class="flex justify-between text-center text-sm">
-
-            <button class="text-[#004b34] font-semibold">
-                <div class="text-2xl">🏠</div>
-                Beranda
+      <!-- CONTENT (BIAR SCROLLABLE) -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- TAB -->
+        <div class="w-full">
+          <div class="flex bg-gray-100 p-2 rounded-full w-full">
+            <button
+              class="flex-1 px-2 py-1 rounded-full bg-[#003d2b] text-white text-sm"
+            >
+              Semua
             </button>
-
-            <button class="text-gray-600">
-                <div class="text-2xl">📄</div>
-                Menu
+            <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
+              Pesanan Baru
             </button>
-
-            <button class="text-gray-600">
-                <div class="text-2xl">👤</div>
-                Profil
+            <button class="flex-1 px-2 py-1 rounded-full text-gray-600 text-sm">
+              Dipersiapkan
             </button>
-
+          </div>
         </div>
+
+        <!-- CARD -->
+        <div class="mt-6 flex justify-center">
+          <div
+            class="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 w-full"
+          >
+            <div class="flex justify-between items-center mb-3">
+              <span
+                class="bg-orange-500 text-white text-xs px-3 py-1 rounded-full"
+              >
+                Pesanan Baru
+              </span>
+              <span class="text-lg font-bold">#20</span>
+            </div>
+
+            <div class="flex justify-between items-center mb-3">
+              <h2 class="text-base font-semibold">Jonathan</h2>
+              <span class="text-gray-400 text-sm">08.30</span>
+            </div>
+
+            <div class="text-sm space-y-1 mb-3">
+              <div class="flex justify-between text-gray-600">
+                <span>Nasi Goreng</span><span>x1</span>
+              </div>
+              <div class="flex justify-between text-gray-600">
+                <span>Mie Goreng</span><span>x1</span>
+              </div>
+            </div>
+
+            <div class="border-t pt-2 flex justify-end">
+              <span class="font-bold">Rp 24.000</span>
+            </div>
+
+            <div class="flex justify-end mt-3">
+              <button
+                class="border border-emerald-800 text-emerald-800 text-sm px-4 py-2 rounded-lg"
+              >
+                Siapkan Pesanan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NAVBAR (INI SEKARANG TIDAK AKAN HILANG) -->
+      <div class="flex justify-between items-center pt-3 border-t">
+        <div class="flex flex-col items-center text-[#003d2b]">
+          <i class="fa-solid fa-house text-xl"></i>
+          <span class="text-xs mt-1">Beranda</span>
+        </div>
+
+        <div class="flex flex-col items-center text-gray-500">
+          <i class="fa-solid fa-box text-xl"></i>
+          <span class="text-xs mt-1">Menu</span>
+        </div>
+
+        <div class="flex flex-col items-center text-gray-500">
+          <i class="fa-solid fa-user text-xl"></i>
+          <span class="text-xs mt-1">Profil</span>
+        </div>
+      </div>
     </div>
+  </body>
 
-</div>
+  <!--<script>
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
 
-</body>
-</html>
+      // proteksi dashboard
+      const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "login.html";
+      }
+    </script>
+--></html>
