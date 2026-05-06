@@ -1,36 +1,30 @@
 <div
-  class="mt-auto bg-[#EBF4F1] px-6 py-3 flex justify-between items-center rounded-[28px] w-full shadow-md"
+  class="absolute bottom-0 left-0 w-full bg-[#EBF4F1] px-6 py-3 flex justify-between items-center rounded-t-2xl shadow-md"
 >
-  <button
-    class="navbar-btn flex flex-col items-center text-gray-500"
-    data-page="dashboard.html"
-    onclick="goTo('dashboard.html')"
+  <a
+    href="../pages/dashboard.html"
+    class="nav-item flex flex-col items-center text-gray-500"
+    data-page="dashboard"
   >
-    <i class="fa-solid fa-house text-xl"></i>
-    <span class="text-xs mt-1">Beranda</span>
-  </button>
+    <i class="fas fa-home text-lg"></i>
+    <span class="text-xs">Beranda</span>
+  </a>
 
-  <button
-    class="navbar-btn flex flex-col items-center text-gray-500"
-    data-page="menu.html"
-    onclick="goTo('menu.html')"
+  <a
+    href="../pages/menu.html"
+    class="nav-item flex flex-col items-center text-gray-500"
+    data-page="menu"
   >
-    <i class="fa-solid fa-box text-xl"></i>
-    <span class="text-xs mt-1">Menu</span>
-  </button>
+    <i class="fas fa-utensils text-lg"></i>
+    <span class="text-xs">Menu</span>
+  </a>
 
-  <button
-    class="navbar-btn flex flex-col items-center text-gray-500"
-    data-page="profile.html"
-    onclick="goTo('profile.html')"
+  <a
+    href="../pages/profile.html"
+    class="nav-item flex flex-col items-center text-gray-500"
+    data-page="profile"
   >
-    <i class="fa-solid fa-user text-xl"></i>
-    <span class="text-xs mt-1">Profil</span>
-  </button>
+    <i class="fas fa-user text-lg"></i>
+    <span class="text-xs">Profile</span>
+  </a>
 </div>
-
-<script>
-  function goTo(page) {
-    window.location.href = page;
-  }
-</script>
