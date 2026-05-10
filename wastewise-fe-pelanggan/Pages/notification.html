@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi - WasteWise</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+        }
+        
+        .phone-container {
+            max-width: 375px;
+            min-height: 812px;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+        }
+        
+        .tab-active {
+            background: #003d2b;
+            color: white;
+        }
+        
+        .tab-inactive {
+            background: transparent;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- Header -->
+    <div class="bg-white px-5 pt-12 pb-4 sticky top-0 z-10 border-b">
+        <div class="flex items-center gap-4">
+            <button onclick="history.back()" 
+                    class="w-10 h-10 bg-[#f28a2c] rounded-full flex items-center justify-center text-white shadow">
+                <i class="fas fa-arrow-left text-lg"></i>
+            </button>
+            <h1 class="text-2xl font-bold text-[#003d2b]">Notifikasi</h1>
+        </div>
+    </div>
+    
+    <!-- Tabs -->
+    <div class="bg-white px-5 py-4 sticky top-[100px] z-10 border-b">
+        <div class="flex gap-2">
+            <button onclick="switchTab('semua')" id="tab-semua" class="tab-active px-4 py-2 rounded-xl text-sm font-semibold transition">
+                Semua
+            </button>
+            <button onclick="switchTab('pesanan')" id="tab-pesanan" class="tab-inactive px-4 py-2 rounded-xl text-sm font-semibold transition">
+                Pesanan
+            </button>
+            <button onclick="switchTab('promosi')" id="tab-promosi" class="tab-inactive px-4 py-2 rounded-xl text-sm font-semibold transition">
+                Promosi
+            </button>
+        </div>
+    </div>
+    
+    <!-- Notification List -->
+    <div class="px-5 py-4 pb-24">
+        
+        <!-- Notification Item 1 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-3 hover:shadow-md transition">
+            <div class="flex gap-3">
+                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-utensils text-[#003d2b]"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-sm text-gray-800">Paket 5k Warung AW segera habis!</h3>
+                        <span class="text-xs text-gray-400">8 min</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">Stok tersisa 4 box saja dari tenant favoritmu, segera beli sebelum habis</p>
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 bg-gray-100 rounded-lg px-2 flex items-center">
+                            <span class="text-xs text-gray-600">Warung AW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification Item 2 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-3 hover:shadow-md transition">
+            <div class="flex gap-3">
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-tag text-[#f28a2c]"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-sm text-gray-800">Diskon 20% untuk pesanan pertama!</h3>
+                        <span class="text-xs text-gray-400">2 jam</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">Gunakan kode promo WELCOME20 untuk mendapatkan diskon 20%</p>
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 bg-gray-100 rounded-lg px-2 flex items-center">
+                            <span class="text-xs text-gray-600">WasteWise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification Item 3 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-3 hover:shadow-md transition">
+            <div class="flex gap-3">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-check-circle text-blue-600"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-sm text-gray-800">Pesananmu telah diterima</h3>
+                        <span class="text-xs text-gray-400">1 hari</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">Pesanan Paket 10k dari Warung AW telah diterima oleh kurir</p>
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 bg-gray-100 rounded-lg px-2 flex items-center">
+                            <span class="text-xs text-gray-600">Warung AW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification Item 4 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 mb-3 hover:shadow-md transition">
+            <div class="flex gap-3">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-gift text-purple-600"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-sm text-gray-800">Tenant baru telah bergabung!</h3>
+                        <span class="text-xs text-gray-400">2 hari</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-2">Bakso President kini tersedia di WasteWise. Pesan sekarang!</p>
+                    <div class="flex items-center gap-2">
+                        <div class="h-8 bg-gray-100 rounded-lg px-2 flex items-center">
+                            <span class="text-xs text-gray-600">WasteWise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[375px] bg-white border-t px-6 py-4 flex justify-between items-center z-20">
+        <a href="dashboard.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-[#003d2b] transition">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-[10px] font-medium">Beranda</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-[#003d2b] transition relative">
+            <i class="fas fa-shopping-bag text-xl"></i>
+            <span class="text-[10px] font-medium">Keranjang</span>
+            <span id="cart-badge" class="hidden absolute -top-1 right-2 bg-red-500 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-gray-400 hover:text-[#003d2b] transition">
+            <i class="fas fa-receipt text-xl"></i>
+            <span class="text-[10px] font-medium">Riwayat</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-[#003d2b] transition">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-[10px] font-medium">Profil</span>
+        </a>
+    </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+function switchTab(tab) {
+    // Reset all tabs
+    document.getElementById('tab-semua').className = 'tab-inactive px-4 py-2 rounded-xl text-sm font-semibold transition';
+    document.getElementById('tab-pesanan').className = 'tab-inactive px-4 py-2 rounded-xl text-sm font-semibold transition';
+    document.getElementById('tab-promosi').className = 'tab-inactive px-4 py-2 rounded-xl text-sm font-semibold transition';
+    
+    // Set active tab
+    document.getElementById('tab-' + tab).className = 'tab-active px-4 py-2 rounded-xl text-sm font-semibold transition';
+    
+    // Here you can add logic to filter notifications based on tab
+    console.log('Switched to tab:', tab);
+}
+</script>
+
+</body>
+</html>

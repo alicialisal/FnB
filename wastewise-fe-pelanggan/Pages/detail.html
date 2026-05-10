@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - WasteWise</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+        }
+        
+        .phone-container {
+            max-width: 375px;
+            min-height: 812px;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- Header Image -->
+    <div class="relative h-72 bg-gray-200">
+        <img src="../assets/images/nasigoreng.png" alt="Warung AW" 
+             class="w-full h-full object-cover"
+             onerror="this.src='https://source.unsplash.com/400x300/?nasi'">
+        
+        <!-- Back Button -->
+        <button onclick="history.back()" 
+                class="absolute top-12 left-5 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+            <i class="fas fa-arrow-left text-[#003d2b]"></i>
+        </button>
+    </div>
+    
+    <!-- Content -->
+    <div class="px-5 py-6 pb-32">
+        <h1 class="text-2xl font-bold text-[#003d2b] mb-2">Warung AW</h1>
+        <div class="flex items-center gap-2 text-sm text-gray-500 mb-6">
+            <i class="fas fa-map-marker-alt text-[#f28a2c]"></i>
+            <span>Kantin UC Makassar</span>
+        </div>
+        
+        <h2 class="text-lg font-bold text-[#003d2b] mb-4">Paket Makanan</h2>
+        
+        <!-- Product Grid -->
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Paket 5k -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-md transition cursor-pointer" onclick="selectProduct('Paket 5k', 5000)">
+                <div class="h-24 bg-gray-100 rounded-xl mb-3 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-400"></i>
+                </div>
+                <h3 class="font-bold text-sm text-gray-800 mb-1">Paket 5k</h3>
+                <p class="text-xs text-gray-500 mb-2">Nasi + Lauk + Sayur</p>
+                <p class="text-[#003d2b] font-bold text-sm">Rp5.000</p>
+            </div>
+            
+            <!-- Paket 10k -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-md transition cursor-pointer" onclick="selectProduct('Paket 10k', 10000)">
+                <div class="h-24 bg-gray-100 rounded-xl mb-3 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-400"></i>
+                </div>
+                <h3 class="font-bold text-sm text-gray-800 mb-1">Paket 10k</h3>
+                <p class="text-xs text-gray-500 mb-2">Nasi + 2 Lauk + Sayur</p>
+                <p class="text-[#003d2b] font-bold text-sm">Rp10.000</p>
+            </div>
+            
+            <!-- Paket 15k -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-md transition cursor-pointer" onclick="selectProduct('Paket 15k', 15000)">
+                <div class="h-24 bg-gray-100 rounded-xl mb-3 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-400"></i>
+                </div>
+                <h3 class="font-bold text-sm text-gray-800 mb-1">Paket 15k</h3>
+                <p class="text-xs text-gray-500 mb-2">Nasi + 3 Lauk + Sayur + Minum</p>
+                <p class="text-[#003d2b] font-bold text-sm">Rp15.000</p>
+            </div>
+            
+            <!-- Paket 20k -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-md transition cursor-pointer" onclick="selectProduct('Paket 20k', 20000)">
+                <div class="h-24 bg-gray-100 rounded-xl mb-3 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-400"></i>
+                </div>
+                <h3 class="font-bold text-sm text-gray-800 mb-1">Paket 20k</h3>
+                <p class="text-xs text-gray-500 mb-2">Nasi + 4 Lauk + Sayur + Minum + Dessert</p>
+                <p class="text-[#003d2b] font-bold text-sm">Rp20.000</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Button (Fixed) -->
+    <div id="product-detail" class="hidden fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[375px] bg-white border-t p-5 z-20">
+        <div class="flex items-center justify-between mb-4">
+            <div>
+                <h3 id="selected-name" class="font-bold text-[#003d2b]">Paket 5k</h3>
+                <p id="selected-price" class="text-sm text-gray-500">Rp5.000</p>
+            </div>
+            <div class="flex items-center gap-3 bg-gray-100 rounded-xl px-3 py-2">
+                <button onclick="decreaseQty()" class="w-8 h-8 bg-[#003d2b] text-white rounded-lg flex items-center justify-center">
+                    <i class="fas fa-minus text-xs"></i>
+                </button>
+                <span id="qty" class="font-bold text-[#003d2b] w-6 text-center">1</span>
+                <button onclick="increaseQty()" class="w-8 h-8 bg-[#003d2b] text-white rounded-lg flex items-center justify-center">
+                    <i class="fas fa-plus text-xs"></i>
+                </button>
+            </div>
+        </div>
+        <button onclick="addToCartFromDetail()" 
+                class="w-full bg-[#003d2b] text-white py-3.5 rounded-xl font-bold hover:bg-[#005c3f] transition">
+            Tambahkan ke Keranjang
+        </button>
+    </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+let selectedProduct = null;
+let selectedPrice = 0;
+let qty = 1;
+
+function selectProduct(name, price) {
+    selectedProduct = name;
+    selectedPrice = price;
+    qty = 1;
+    
+    document.getElementById('selected-name').textContent = name;
+    document.getElementById('selected-price').textContent = `Rp${price.toLocaleString('id-ID')}`;
+    document.getElementById('qty').textContent = qty;
+    document.getElementById('product-detail').classList.remove('hidden');
+    
+    // Scroll to bottom
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+
+function increaseQty() {
+    qty++;
+    document.getElementById('qty').textContent = qty;
+}
+
+function decreaseQty() {
+    if (qty > 1) {
+        qty--;
+        document.getElementById('qty').textContent = qty;
+    }
+}
+
+function addToCartFromDetail() {
+    if (!selectedProduct) return;
+    
+    const totalPrice = selectedPrice * qty;
+    let cart = JSON.parse(localStorage.getItem('wastewise_cart')) || [];
+    
+    const existingItem = cart.find(item => item.name === selectedProduct);
+    if (existingItem) {
+        existingItem.qty += qty;
+    } else {
+        cart.push({
+            name: selectedProduct,
+            price: selectedPrice,
+            qty: qty,
+            addedAt: new Date().toISOString()
+        });
+    }
+    
+    localStorage.setItem('wastewise_cart', JSON.stringify(cart));
+    
+    // Update badge
+    if (typeof updateBadge === 'function') {
+        updateBadge();
+    }
+    
+    alert(`${selectedProduct} (x${qty}) berhasil ditambahkan ke keranjang!`);
+    document.getElementById('product-detail').classList.add('hidden');
+}
+</script>
+
+</body>
+</html>
