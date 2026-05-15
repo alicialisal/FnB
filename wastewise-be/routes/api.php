@@ -28,7 +28,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/resto/{kode}', [RestoController::class, 'show']);    // single resto + menu
 
     // Menu
-    Route::get('/menu/{kodeMenu}', [MenuController::class, 'show']);  // single menu
+    Route::get('/menu/{kodeMenu}',    [MenuController::class, 'show']);    // detail menu
+    Route::post('/menu',              [MenuController::class, 'store']);   // tambah menu
+    Route::put('/menu/{kodeMenu}',    [MenuController::class, 'update']);  // edit menu
+    Route::delete('/menu/{kodeMenu}', [MenuController::class, 'destroy']); // hapus menu
 
     // Orders  (pelanggan only)
     Route::get('/pesanan',            [PesananController::class, 'index']);  // my orders
